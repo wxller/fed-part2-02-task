@@ -13,7 +13,7 @@ module.exports = merge(common, {
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      BASE_URL: JSON.stringify("/"),
+      BASE_URL: JSON.stringify(""),
     }),
   ],
 });

@@ -8,7 +8,10 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
-      patterns: [{ from: "public", to: "/" }],
+      patterns: [{ from: "public", to: "public" }],
+    }),
+    new webpack.DefinePlugin({
+      BASE_URL: JSON.stringify(""),
     }),
   ],
 });
