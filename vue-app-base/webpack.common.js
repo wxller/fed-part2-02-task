@@ -8,9 +8,9 @@ module.exports = {
   mode: "none",
   entry: "./src/main.js",
   output: {
-    filename: "js/main.js",
+    // filename: "js/main.js",
 
-    // filename: "[name]-[chunkhash:8].bundle.js",
+    filename: "js/[name]-[chunkhash:8].bundle.js",
   },
   optimization: {
     minimizer: [
@@ -106,7 +106,7 @@ module.exports = {
       template: "./public/index.html",
     }),
     new MiniCssExtractPlugin({
-      filename: "[name]-[chunkhash:8].bundle.css",
+      filename: "css/[name]-[chunkhash:8].bundle.css",
     }),
   ],
 };
