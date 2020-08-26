@@ -2,22 +2,9 @@ const htmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin");
-const TerserWebpackPlugin = require("terser-webpack-plugin");
 module.exports = {
   mode: "none",
   entry: "./src/main.js",
-  output: {
-    // filename: "js/main.js",
-
-    filename: "js/[name]-[chunkhash:8].bundle.js",
-  },
-  optimization: {
-    minimizer: [
-      new TerserWebpackPlugin(),
-      new OptimizeCssAssetsWebpackPlugin(),
-    ],
-  },
   devtool: "source-map",
   module: {
     rules: [
@@ -101,12 +88,16 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "css/[name].bundle.css",
+    }),
     new htmlWebpackPlugin({
       title: "webpack vue",
       template: "./public/index.html",
     }),
-    new MiniCssExtractPlugin({
-      filename: "css/[name]-[chunkhash:8].bundle.css",
+    new webpack.DefinePlugin({
+      BASE_URL: JSON.stringify("/"),
+      TITLE: JSON.stringify("11"),
     }),
   ],
 };

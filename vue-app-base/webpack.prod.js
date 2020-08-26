@@ -3,15 +3,31 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const common = require("./webpack.common");
 const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserWebpackPlugin = require("terser-webpack-plugin");
 module.exports = merge(common, {
   mode: "production",
+  output: {
+    // filename: "js/main.js",
+    filename: "js/[name]-[chunkhash:8].bundle.js",
+  },
+  optimization: {
+    minimizer: [
+      new TerserWebpackPlugin(),
+      new OptimizeCssAssetsWebpackPlugin(),
+    ],
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [{ from: "public", to: "" }],
     }),
     new webpack.DefinePlugin({
-      BASE_URL: JSON.stringify(""),
+      BASE_URL: JSON.stringify("/"),
+    }),
+    new MiniCssExtractPlugin({
+      filename: "css/[name]-[chunkhash:8].bundle.css",
     }),
   ],
   optimization: {
